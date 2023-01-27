@@ -1,118 +1,139 @@
-function suma(a,b) {
-    let resultado = a + b;
-    console.log(resultado)
+let operando1 = "";
+let operando2 = "";
+
+function suma(a, b) {
+    return a + b;
+}
+  
+function resta(a, b) {
+    return a - b;
+}
+  
+function multiplicacion(a, b) {
+    return a * b;
+}
+  
+function division(a, b) {
+    return a / b;
 }
 
-function resta(a,b) {
-    let resultado = a - b;
-    console.log(resultado)
-}
+let operadorObj = null;
+let limpiarPantalla = false;
 
-function multiplicacion(a,b) {
-    let resultado = a * b;
-    console.log(resultado)
-}
+const botones = document.querySelectorAll('#tecla');
 
-function division(a,b) {
-    let resultado = a / b;
-    console.log(resultado)
-}
-
-function calculo(operandoA, operador, operandoB) {
-    if (operador === "+") {
-        suma(operandoA, operandoB)
-    } else if (operador === "-") {
-        resta(operandoA, operandoB)
-    } else if (operador === "*") {
-        multiplicacion(operandoA, operandoB)
-    } else if (operador === "/") {
-        division(operandoA, operandoB)
-    }
-}
-
-const operando1 = [0,];
-const operando2 = [];
-const operadorObj = []; 
-
-const numeroEnPantallaBaja = document.querySelector(".parteInferior");
-const numerosEnPantallaBaja = document.querySelectorAll('.parteInferior > p');
-const botonesOperando = document.querySelectorAll('#tecla');
-
-
-botonesOperando.forEach((button) => {
+botones.forEach((button) => {
     button.addEventListener('click', () => {
         if (button.className === "operando") {
-            switch (button.value) {
-                case "0":
-                    operando1.push(0);
-                    break;
-                case "1":
-                    operando1.push(1);
-                    break;
-                case "2":
-                    operando1.push(2);
-                    break;
-                case "3":
-                    operando1.push(3);
-                    break;
-                case "4":
-                    operando1.push(4);
-                    break;
-                case "5":
-                    operando1.push(5);
-                    break;
-                case "6":
-                    operando1.push(6);
-                    break;            
-                case "7":
-                    operando1.push(7);
-                    break;    
-                case "8":
-                    operando1.push(8);
-                    break;
-                case "9":
-                    operando1.push(9); 
-                    break;              
-            }    
+            agregarNumeros(button.value);        
         } else if (button.className === "operador") {
-            switch (button.value) {
-                case "+":
-                    operadorObj.splice(0, 1, "+");
-                    break;    
-                case "-":
-                    operadorObj.splice(0, 1, "-");
-                    break;    
-                case "*":
-                    operadorObj.splice(0, 1, "*");
-                    break;
-                case "/":
-                    operadorObj.splice(0, 1, "/");
-                    break;                                     
-            } 
+            cambiarOperadorObj(button.value); 
         } else if (button.className === "simbolo") {
             switch (button.value) {  
                 case "=":
-                    numeroEnPantallaBaja.textContent = "=";
-                    console.log(operando1 + operadorObj);
+                 comprobacion();
                     break;
                 case "C":
-                    numeroEnPantallaBaja.textContent = "C";
-                    break;                    
+                    resetear();
+                    break;
+                case "borrar":
+                    borrarNumero();
+                    break;
+                case ".":
+                    decimales();
+                    break;        
+                case "negativos":
+                    posNeg();
+                    break;                        
             }
-        }         
-        
+        }               
     });
 });
 
-//function mostrarEnPantalla(operadores, operandos) {
-    
-//}
+const pantallaArriba = document.querySelector('.parteSuperior');
+const pantallaAbajo = document.querySelector('.parteInferior');
 
-console.log(operando1)
-//const pulsoOperadorOSimbolo = pantallaArriba.some(function(pulsaciones) {
-//    if(currentYear - person.year >= 19) {
-//        return true;
-//    }
-//});
+function posNeg() {
+    if(pantallaAbajo.textContent > 0) {
+        pantallaAbajo.textContent= "-"+ pantallaAbajo.textContent;
+    } else {
+        pantallaAbajo.textContent = pantallaAbajo.textContent *-1;
+    }
+}
 
-//calculo(2,"-",3)
+function calcular(a, operador, b) {
+    a = Number(a);
+    b = Number(b);
+    switch (operador) {
+      case '+':
+        return suma(a, b);
+      case '-':
+        return resta(a, b);
+      case '*':
+        return multiplicacion(a, b);
+      case '/':
+        if (b === 0) return null
+        else return division(a, b);
+      default:
+        return null
+    }
+}
+
+function agregarNumeros(numero) {
+  if (pantallaAbajo.textContent === '0' || limpiarPantalla)
+    rehacerOperando1()
+  pantallaAbajo.textContent += numero
+}
+
+function rehacerOperando1() {
+  pantallaAbajo.textContent = ''
+  limpiarPantalla = false
+}
+
+function resetear() {
+  pantallaAbajo.textContent = '0'
+  pantallaArriba.textContent = ''
+  operando1 = ''
+  operando2 = ''
+  operadorObj = null
+}
+
+function decimales() {
+  if (limpiarPantalla) rehacerOperando1()
+  if (pantallaAbajo.textContent === '')
+    pantallaAbajo.textContent = '0'
+  if (pantallaAbajo.textContent.includes('.')) return
+  pantallaAbajo.textContent += '.'
+}
+
+function borrarNumero() {
+  pantallaAbajo.textContent = pantallaAbajo.textContent
+    .toString()
+    .slice(0, -1)
+}
+
+function cambiarOperadorObj(operador) {
+  if (operadorObj !== null) comprobacion()
+  operando1 = pantallaAbajo.textContent
+  operadorObj = operador
+  pantallaArriba.textContent = `${operando1} ${operadorObj}`
+  limpiarPantalla = true
+}
+
+function comprobacion() {
+  if (operadorObj === null || limpiarPantalla) return
+  if (operadorObj === '/' && pantallaAbajo.textContent === '0') {
+    alert("No se puede dividir entre 0")
+    return
+  }
+  operando2 = pantallaAbajo.textContent
+  pantallaAbajo.textContent = redondeo(
+    calcular(operando1, operadorObj, operando2)
+  )
+  pantallaArriba.textContent = `${operando1} ${operadorObj} ${operando2} =`
+  operadorObj = null
+}
+
+function redondeo(number) {
+  return Math.round(number * 100) / 100
+}
