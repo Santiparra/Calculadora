@@ -17,13 +17,16 @@ function division(a, b) {
     return a / b;
 }
 
+
+
+
 let operadorObj = null;
 let limpiarPantalla = false;
 
-const botones = document.querySelectorAll('#tecla');
+const botones = document.querySelectorAll("#tecla");
 
 botones.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener("click", () => {
         if (button.className === "operando") {
             agregarNumeros(button.value);        
         } else if (button.className === "operador") {
@@ -50,8 +53,8 @@ botones.forEach((button) => {
     });
 });
 
-const pantallaArriba = document.querySelector('.parteSuperior');
-const pantallaAbajo = document.querySelector('.parteInferior');
+const pantallaArriba = document.querySelector(".parteSuperior");
+const pantallaAbajo = document.querySelector(".parteInferior");
 
 function posNeg() {
     if(pantallaAbajo.textContent > 0) {
@@ -65,13 +68,13 @@ function calcular(a, operador, b) {
     a = Number(a);
     b = Number(b);
     switch (operador) {
-      case '+':
+      case "+":
         return suma(a, b);
-      case '-':
+      case "-":
         return resta(a, b);
-      case '*':
+      case "*":
         return multiplicacion(a, b);
-      case '/':
+      case "/":
         if (b === 0) return null
         else return division(a, b);
       default:
@@ -80,30 +83,22 @@ function calcular(a, operador, b) {
 }
 
 function agregarNumeros(numero) {
-  if (pantallaAbajo.textContent === '0' || limpiarPantalla)
+  if (pantallaAbajo.textContent === "0" || limpiarPantalla)
     rehacerOperando1()
   pantallaAbajo.textContent += numero
 }
 
 function rehacerOperando1() {
-  pantallaAbajo.textContent = ''
-  limpiarPantalla = false
+  pantallaAbajo.textContent = "";
+  limpiarPantalla = false;
 }
 
 function resetear() {
-  pantallaAbajo.textContent = '0'
-  pantallaArriba.textContent = ''
-  operando1 = ''
-  operando2 = ''
-  operadorObj = null
-}
-
-function decimales() {
-  if (limpiarPantalla) rehacerOperando1()
-  if (pantallaAbajo.textContent === '')
-    pantallaAbajo.textContent = '0'
-  if (pantallaAbajo.textContent.includes('.')) return
-  pantallaAbajo.textContent += '.'
+  operando1 = "";
+  operando2 = "";
+  operadorObj = null;
+  pantallaAbajo.textContent = "0";
+  pantallaArriba.textContent = "";
 }
 
 function borrarNumero() {
@@ -112,17 +107,17 @@ function borrarNumero() {
     .slice(0, -1)
 }
 
-function cambiarOperadorObj(operador) {
-  if (operadorObj !== null) comprobacion()
-  operando1 = pantallaAbajo.textContent
-  operadorObj = operador
-  pantallaArriba.textContent = `${operando1} ${operadorObj}`
-  limpiarPantalla = true
+function decimales() {
+  if (limpiarPantalla) rehacerOperando1()
+  if (pantallaAbajo.textContent === "")
+    pantallaAbajo.textContent = "0"
+  if (pantallaAbajo.textContent.includes(".")) return
+  pantallaAbajo.textContent += "."
 }
 
 function comprobacion() {
   if (operadorObj === null || limpiarPantalla) return
-  if (operadorObj === '/' && pantallaAbajo.textContent === '0') {
+  if (operadorObj === "/" && pantallaAbajo.textContent === "0") {
     alert("No se puede dividir entre 0")
     return
   }
@@ -132,6 +127,14 @@ function comprobacion() {
   )
   pantallaArriba.textContent = `${operando1} ${operadorObj} ${operando2} =`
   operadorObj = null
+}
+
+function cambiarOperadorObj(operador) {
+  if (operadorObj !== null) comprobacion()
+  operando1 = pantallaAbajo.textContent
+  operadorObj = operador
+  pantallaArriba.textContent = `${operando1} ${operadorObj}`
+  limpiarPantalla = true
 }
 
 function redondeo(number) {
