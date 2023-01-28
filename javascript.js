@@ -26,11 +26,11 @@ const botones = document.querySelectorAll("#tecla");
 
 botones.forEach((button) => {
     button.addEventListener("click", () => {
-        if (button.classtecla === "operando") {
+        if (button.className === "operando") {
             agregarNumeros(button.value);        
-        } else if (button.classtecla === "operador") {
+        } else if (button.className === "operador") {
             cambiarOperadorObj(button.value); 
-        } else if (button.classtecla === "simbolo") {
+        } else if (button.className === "simbolo") {
             switch (button.value) {  
                 case "=":
                  comprobacion();
