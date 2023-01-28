@@ -17,9 +17,6 @@ function division(a, b) {
     return a / b;
 }
 
-
-
-
 let operadorObj = null;
 let limpiarPantalla = false;
 

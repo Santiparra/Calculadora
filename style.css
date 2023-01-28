@@ -1,0 +1,82 @@
+body {
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.completo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    min-height: 100px;
+    padding: 10px;
+    margin-top: 200px;
+    background-color: #333333;
+    border: 5px solid black;
+}
+
+.pantalla {
+    background-color: whitesmoke;
+    min-height: 68px;
+    padding: 8px;
+}
+
+.parteSuperior,
+.parteInferior {
+    text-align: right;
+    font-family: 'Orbitron';
+    font-weight: 700;
+}
+
+.parteSuperior {
+font-size: 20px;
+}
+
+.parteInferior {
+    font-size: 24px;
+}
+
+.controles {
+    margin-top: 12px;
+   display: flex;
+   align-items: flex-end;
+}
+
+#fila1,
+#fila2,
+#fila3,
+#operadores,
+#simbolos {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+button[value="="] {
+    background-color: #4CAF50; 
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    height: 142px;
+} 
+
+#tecla {
+    background-color: whitesmoke;
+    padding: 20px;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.operando {
+    display: flex;
+    flex: wrap;
+    border-radius: 10%;
+}
