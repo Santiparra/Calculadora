@@ -26,11 +26,11 @@ const botones = document.querySelectorAll("#tecla");
 
 botones.forEach((button) => {
     button.addEventListener("click", () => {
-        if (button.className === "operando") {
+        if (button.classtecla === "operando") {
             agregarNumeros(button.value);        
-        } else if (button.className === "operador") {
+        } else if (button.classtecla === "operador") {
             cambiarOperadorObj(button.value); 
-        } else if (button.className === "simbolo") {
+        } else if (button.classtecla === "simbolo") {
             switch (button.value) {  
                 case "=":
                  comprobacion();
@@ -64,6 +64,75 @@ function posNeg() {
         pantallaAbajo.textContent = pantallaAbajo.textContent *-1;
     }
 }
+
+// Add event listener on keyup
+document.addEventListener("keydown", (event) => {
+  var tecla = event.key;
+  switch (tecla) {
+    case "0":
+      agregarNumeros(event.key);
+      break;
+    case "1":
+      agregarNumeros(event.key);
+      break;
+    case "2":
+      agregarNumeros(event.key);
+      break;
+    case "3":
+      agregarNumeros(event.key);
+      break;
+    case "4":
+      agregarNumeros(event.key);
+      break;
+    case "5":
+      agregarNumeros(event.key);
+      break;
+    case "6":
+      agregarNumeros(event.key);
+      break;
+    case "7":
+      agregarNumeros(event.key);
+      break;
+    case "8":
+      agregarNumeros(event.key);
+      break;
+    case "9":
+      agregarNumeros(event.key);
+      break;
+    case "/":
+      cambiarOperadorObj(event.key);
+      break;
+    case "*":
+      cambiarOperadorObj(event.key);
+      break;
+    case "-":
+      cambiarOperadorObj(event.key);
+      break;
+    case "+":
+      cambiarOperadorObj(event.key);
+      break; 
+    case "=":
+      comprobacion();
+      break; 
+    case "Enter":
+      comprobacion();
+      break; 
+    case "Backspace":
+      borrarNumero();
+      break;
+    case "|":
+      posNeg();
+      break;
+    case ".":
+      decimales();
+      break;
+    case ",":
+      decimales();
+      break;                              
+    default:
+      break;
+  }
+}, false);
 
 // Funcion que toma 3 strings y llama a la funcion correspondiente
 
