@@ -1,6 +1,6 @@
 let operando1 = "";
 let operando2 = "";
-
+// Funciones basicas para llamar mas tarde
 function suma(a, b) {
     return a + b;
 }
@@ -21,6 +21,8 @@ let operadorObj = null;
 let limpiarPantalla = false;
 
 const botones = document.querySelectorAll("#tecla");
+
+//Funcion que filtra el input y llama a la subfuncion correspondiente
 
 botones.forEach((button) => {
     button.addEventListener("click", () => {
@@ -53,6 +55,8 @@ botones.forEach((button) => {
 const pantallaArriba = document.querySelector(".parteSuperior");
 const pantallaAbajo = document.querySelector(".parteInferior");
 
+//Pasar numeros de positivo a negativo y visceversa
+
 function posNeg() {
     if(pantallaAbajo.textContent > 0) {
         pantallaAbajo.textContent= "-"+ pantallaAbajo.textContent;
@@ -60,6 +64,8 @@ function posNeg() {
         pantallaAbajo.textContent = pantallaAbajo.textContent *-1;
     }
 }
+
+// Funcion que toma 3 strings y llama a la funcion correspondiente
 
 function calcular(a, operador, b) {
     a = Number(a);
@@ -79,6 +85,8 @@ function calcular(a, operador, b) {
     }
 }
 
+//Estas 2 funciones solo se encargan de procesar los input en strings
+
 function agregarNumeros(numero) {
   if (pantallaAbajo.textContent === "0" || limpiarPantalla)
     rehacerOperando1()
@@ -89,6 +97,8 @@ function rehacerOperando1() {
   pantallaAbajo.textContent = "";
   limpiarPantalla = false;
 }
+
+//funciones de borrado y reseteo
 
 function resetear() {
   operando1 = "";
@@ -104,6 +114,8 @@ function borrarNumero() {
     .slice(0, -1)
 }
 
+//Agregar decimales, solo 1 coma por valor
+
 function decimales() {
   if (limpiarPantalla) rehacerOperando1()
   if (pantallaAbajo.textContent === "")
@@ -111,6 +123,8 @@ function decimales() {
   if (pantallaAbajo.textContent.includes(".")) return
   pantallaAbajo.textContent += "."
 }
+
+//Esta comprobacion revisa si hay alguna cuenta por hacer, avisa que no se puede dividir entre 0 si se da el caso y llama a calcular
 
 function comprobacion() {
   if (operadorObj === null || limpiarPantalla) return
@@ -125,6 +139,8 @@ function comprobacion() {
   pantallaArriba.textContent = `${operando1} ${operadorObj} ${operando2} =`
   operadorObj = null
 }
+
+//Funciones extras, solo maneja el operador en la cuenta y el historial de cuentas realizadas, la otra simplemente redondea decimales para que solo haya 2 numeros despues de la coma 
 
 function cambiarOperadorObj(operador) {
   if (operadorObj !== null) comprobacion()
