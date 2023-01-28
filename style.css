@@ -10,7 +10,7 @@ body {
     display: flex;
     align-self: center;
     justify-content: center; 
-    height: 50vh;
+    height: 420px;
     min-height: 100px;
     max-width: 450px;
     padding: 10px;
@@ -41,9 +41,10 @@ font-size: 20px;
 }
 
 .controles {
-    margin-top: 12px;
+   margin-top: 12px;
    display: flex;
    align-items: flex-end;
+   justify-content: flex-end;
 }
 
 #fila1,
